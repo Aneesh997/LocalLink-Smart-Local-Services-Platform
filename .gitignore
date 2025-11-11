@@ -6,7 +6,9 @@ venv/
 env/
 .venv/
 *.sqlite3
-*.db
+# *.db   ← Commented out so our DB can be committed
+!.local_services.db   # Explicitly include this file
+!.local_services.db
 .DS_Store
 *.log
 node_modules/
