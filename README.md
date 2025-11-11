@@ -1,132 +1,82 @@
-# Local Link
+# 🧭 Local Link – Smart Local Services Platform
 
-## 📌 Project Overview
-**Local Link** is a local service provider platform designed to connect **service providers** with **customers** seamlessly.  
-Built with **Flask, SQLAlchemy, and Flask-Login**, this project is ideal for **students, beginners, and learners** who want to understand how real-world service platforms are built.
+## 🏗️ Overview
+**Local Link** is a full-stack platform built to bridge the gap between **customers** and **local service providers**.  
+It allows users to discover, book, and review nearby services, while enabling providers to manage their business and client interactions from a single dashboard.  
 
-This platform can be considered:
-- ✅ A **mini-project** for academic purposes.
-- ✅ A **major/advanced project** with proper features like booking, rating, and feedback systems.
+Developed using **Flask** and **SQLAlchemy**, this system demonstrates practical implementation of user roles, secure authentication, and CRUD-based service management — making it a perfect fit for both **academic mini-projects** and **advanced coursework** in web development.
 
 ---
 
-## 🚀 Features
-- **User Roles**: Customer, Service Provider, and Admin.
-- **Service Listings**: Providers can create and manage services.
-- **Booking System**: Customers can book services and track notifications.
-- **Rating & Feedback**: Customers can rate services after booking.
-- **Complaint System**: Users can submit and track complaints.
-- **Chat System**: Real-time communication between customers and providers.
-- **Location-Based Personalization**: Shows services near the user's location.
-- **Admin Dashboard**: Manage users, services, and complaints.
-- **Authentication**: Secure login and registration with password hashing.
+## ⚡ Key Features
+- **Multiple Roles:** Separate dashboards and permissions for **Customer**, **Service Provider**, and **Admin**.  
+- **Service Management:** Providers can create, update, and delete their listed services.  
+- **Bookings & Notifications:** Customers can schedule services and view their booking status.  
+- **Ratings & Reviews:** Built-in feedback system for quality evaluation.  
+- **Complaint Submission:** Users can log complaints that admins can track and resolve.  
+- **User Authentication:** Registration and login secured using password hashing.  
+- **Location Support:** Helps users view services relevant to their location.  
+- **Admin Controls:** Manage all registered users, providers, and complaints.
 
 ---
 
-## 🛠️ Tech Stack
-- **Backend**: Flask, SQLAlchemy, Flask-Login
-- **Database**: SQLite
-- **Frontend**: HTML, Bootstrap, Jinja2 Templates
-- **Other**: Werkzeug (for password hashing)
+## 🧰 Tech Stack
+| Component | Technology |
+|------------|-------------|
+| **Backend** | Flask, SQLAlchemy, Flask-Login |
+| **Frontend** | HTML5, Bootstrap 5, Jinja2 Templates |
+| **Database** | SQLite |
+| **Utilities** | Werkzeug (Password Hashing), Python 3.10 |
 
 ---
 
-## 📂 Project Structure
-```
+## 🗂️ Project Directory Layout
+
 LocalLink/
-├── app.py                # Main Flask application
-├── local_services.db     # SQLite database
-├── templates/            # HTML templates
-│   ├── base.html
-│   ├── index.html
-│   ├── profile.html
-│   ├── services.html
-│   ├── booking_form.html
-│   ├── complaint.html
-│   └── admin_dashboard.html
+├── app.py # Main Flask application file
+├── local_services.db # SQLite database
+├── templates/ # Jinja2 HTML templates
+│ ├── base.html
+│ ├── index.html
+│ ├── profile.html
+│ ├── services.html
+│ ├── booking_form.html
+│ ├── complaint.html
+│ └── admin_dashboard.html
 ├── static/
-│   ├── css/
-│   │   └── style.css
-│   └── screenshots/
-│       ├── banner.png
-│       ├── homepage.png
-│       ├── profile_page.png
-│       └── admin_dashboard.png
+│ ├── css/
+│ │ └── style.css
+│ └── js/
+│ └── script.js
 └── README.md
-```
+
 
 ---
 
-## 📸 Screenshots
+# ⚙️ INSTALLATION & SETUP GUIDE
 
-<img width="1348" height="630" alt="image" src="https://github.com/user-attachments/assets/ff9dca56-14a1-4d29-bcac-73db07454bf5" />
-
-<img width="1348" height="626" alt="image" src="https://github.com/user-attachments/assets/d1987558-a5c1-4356-8ae5-25c670714a26" />
-
-<img width="1345" height="623" alt="image" src="https://github.com/user-attachments/assets/544cf1d0-b208-497c-9002-7e6656daf765" />
-
-<img width="1349" height="631" alt="image" src="https://github.com/user-attachments/assets/95f93a09-d5f8-48f0-81c7-8dbd23610077" />
-
-<img width="1343" height="627" alt="image" src="https://github.com/user-attachments/assets/8808618d-941a-49f1-8225-1864619e6836" />
-
----
-
-## ⚙️ Installation & Setup
-
-1. **Clone the repository**  
-```bash
+# 1️⃣ Clone the repository
 git clone https://github.com/vaibhavrawat27/local-link.git
 cd local-link
-```
 
-2. **Create a virtual environment**  
-```bash
+# 2️⃣ Create a virtual environment
 python -m venv venv
-source venv/bin/activate   # On Windows: venv\Scripts\activate
-```
 
-3. **Install dependencies**  
-```bash
+# 3️⃣ Activate the environment
+# On Windows:
+venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
+
+# 4️⃣ Install all required dependencies
 pip install -r requirements.txt
-```
 
-4. **Run the application**  
-```bash
+# 5️⃣ Run the Flask application
 python app.py
-```
 
-5. **Access in Browser**  
-Open [http://127.0.0.1:5000](http://127.0.0.1:5000) in your browser.
+# 6️⃣ Open your browser and visit:
+# http://127.0.0.1:5000
 
----
-
-## 👤 Default Admin Credentials
-```
-Email: admin@example.com
-Password: admin123
-```
-
----
-
-## 🎯 Future Enhancements
-- ✅ Payment Gateway Integration  
-- ✅ Real-time Chat using WebSockets  
-- ✅ Push Notifications  
-- ✅ Advanced Search & Filtering  
-
----
-
-## 📝 License
-This project is open-source and available under the **MIT License**.
-
----
-
-## 🙌 Contribution
-Contributions, issues, and feature requests are welcome!  
-Feel free to fork this repository and submit a pull request.
-
----
-
-## ✨ Author
-Developed by **Vaibhav Rawat**  
-For learning and academic purposes.
+# ✅ Default Admin Login:
+# Email: admin@example.com
+# Password: admin123
