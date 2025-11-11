@@ -28,7 +28,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
 
-                {% if current_user.is_authenticated %}
+                {% if current_user %}
 
                     {# ✅ PROVIDER NAVIGATION #}
                     {% if current_user.role == "provider" %}

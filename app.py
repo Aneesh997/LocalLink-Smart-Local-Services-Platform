@@ -124,6 +124,15 @@ def complaint():
         return redirect(url_for('index'))
     return render_template('complaint.html')
 
+# Make current_user available to all templates
+@app.context_processor
+def inject_user():
+    user = None
+    if 'user_id' in session:
+        user = User.query.get(session['user_id'])
+    return dict(current_user=user)
+
+
 # ------------------ DATABASE INITIALIZATION ------------------ #
 # Automatically creates tables if they don't exist
 with app.app_context():
