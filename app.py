@@ -132,6 +132,11 @@ def inject_user():
         user = User.query.get(session['user_id'])
     return dict(current_user=user)
 
+@app.route('/services')
+def services():
+    all_services = Service.query.filter_by(is_available=True).all()
+    return render_template('services.html', services=all_services)
+
 
 # ------------------ DATABASE INITIALIZATION ------------------ #
 # Automatically creates tables if they don't exist
