@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+    <h3 class="mb-4">✨ Available Services</h3>
+
+    <!-- Search and Filter Section -->
+    <div class="card glass-card mb-4">
+        <div class="card-body">
+            <form method="GET" class="row g-3">
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-text" style="background: var(--primary-gradient); color: white; border: none;">
+                            🔍
+                        </span>
+                        <input type="text" name="q" class="form-control" placeholder="Search service..." value="{{ request.args.q }}">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-text" style="background: var(--secondary-gradient); color: white; border: none;">
+                            📍
+                        </span>
+                        <input type="text" name="location" class="form-control" placeholder="Filter by location" value="{{ request.args.location }}">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary w-100" style="background: var(--success-gradient); border: none;">
+                        <i class="fas fa-filter"></i> Filter
+                    </button>
+                </div>
+                <div class="col-md-2">
+                    <a href="{{ url_for('services') }}" class="btn btn-secondary w-100">
+                        <i class="fas fa-sync"></i> Reset
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="row">
+        {% for s in services %}
+        <div class="col-xl-4 col-lg-6 col-md-6 mb-4">
+            <div class="card service-card shadow card-float">
+                <div class="card-body">
+                    <!-- Service Header -->
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <h5 class="card-title fw-bold" style="background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                            {{ s.name }}
+                        </h5>
+                        <span class="badge rounded-pill" style="background: var(--warning-gradient); color: white;">
+                            {{ s.category or 'General' }}
+                        </span>
+                    </div>
+
+                    <!-- Service Description -->
+                    <p class="card-text text-muted mb-3">{{ s.description }}</p>
+
+                    <!-- Price and Location -->
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <div class="service-price">₹{{ s.price }}</div>
+                            <small class="text-muted">Starting Price</small>
+                        </div>
+                        <div class="col-6 text-end">
+                            <div class="service-location">
+                                <i class="fas fa-map-marker-alt"></i> {{ s.location }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rating -->
+                    <div class="rating-section mb-3">
+                        <div class="rating-stars">
+                            {% if s.avg_rating > 0 %}
+                                {% for i in range(5) %}
+                                    {% if i < s.avg_rating|round|int %}
+                                        <span class="star">⭐</span>
+                                    {% else %}
+                                        <span class="star text-muted">☆</span>
+                                    {% endif %}
+                                {% endfor %}
+                                <span class="ms-2 fw-bold" style="color: var(--text-primary);">({{ s.avg_rating }}/5)</span>
+                            {% else %}
+                                <span class="text-muted">No ratings yet</span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex gap-2 flex-wrap">
+                        {% if current_user.is_authenticated and current_user.role == 'customer' %}
+                            <a href="{{ url_for('book', service_id=s.id) }}" class="btn btn-primary flex-fill">
+                                <i class="fas fa-calendar-check"></i> Book Now
+                            </a>
+                            <a href="{{ url_for('hire', service_id=s.id) }}" class="btn btn-warning" style="border: none;">
+                                <i class="fas fa-star"></i> Rate
+                            </a>
+                        {% else %}
+                            <button class="btn btn-secondary flex-fill" disabled>
+                                <i class="fas fa-sign-in-alt"></i> Login to Book
+                            </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <!-- No Services Message -->
+        <div class="col-12">
+            <div class="card text-center py-5">
+                <div class="card-body">
+                    <i class="fas fa-search fa-3x mb-3" style="background: var(--secondary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></i>
+                    <h4 class="text-muted">No services found</h4>
+                    <p class="text-muted">Try adjusting your search criteria or check back later.</p>
+                    <a href="{{ url_for('services') }}" class="btn btn-primary">
+                        <i class="fas fa-sync"></i> View All Services
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

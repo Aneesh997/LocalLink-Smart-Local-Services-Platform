@@ -1,0 +1,175 @@
+<!-- theme_handler.html - Separate file to handle theme functionality -->
+<script>
+    // Theme Toggle Functionality
+    document.addEventListener('DOMContentLoaded', function () {
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+
+        // Get saved theme or default to light
+        const savedTheme = localStorage.getItem('theme') || 'light';
+
+        // Apply saved theme
+        document.documentElement.setAttribute('data-bs-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+
+        // Theme toggle event
+        if (themeToggle) {
+            themeToggle.addEventListener('click', function () {
+                const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+                // Update theme
+                document.documentElement.setAttribute('data-bs-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon(newTheme);
+
+                // Add ripple effect
+                createRipple(this);
+            });
+        }
+
+        function updateThemeIcon(theme) {
+            if (themeIcon) {
+                themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+            }
+        }
+
+        function createRipple(button) {
+            const ripple = document.createElement('span');
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+
+            const rect = button.getBoundingClientRect();
+            const x = event.clientX - rect.left - radius;
+            const y = event.clientY - rect.top - radius;
+
+            ripple.style.width = ripple.style.height = `${diameter}px`;
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+            ripple.classList.add('ripple');
+
+            const existingRipple = button.querySelector('.ripple');
+            if (existingRipple) {
+                existingRipple.remove();
+            }
+
+            button.appendChild(ripple);
+
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        }
+
+        // Add ripple effect to all buttons
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function (e) {
+                createRipple(this);
+            });
+        });
+    });
+</script>
+
+<style>
+    .navbar-glass {
+        background: rgba(255, 255, 255, 0.1) !important;
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    [data-bs-theme="dark"] .navbar-glass {
+        background: rgba(30, 30, 60, 0.1) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .alert-glass {
+        backdrop-filter: blur(16px);
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 1rem;
+    }
+
+    [data-bs-theme="dark"] .alert-glass {
+        background: rgba(45, 55, 72, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.7);
+        transform: scale(0);
+        animation: ripple-animation 0.6s linear;
+    }
+
+    @keyframes ripple-animation {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+
+    .btn {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .theme-toggle {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        color: white;
+    }
+
+    .theme-toggle:hover {
+        transform: rotate(30deg) scale(1.1);
+    }
+
+    .navbar-brand {
+        font-weight: 700;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 1.5rem;
+    }
+
+    .navbar-nav .nav-link {
+        border-radius: 0.75rem;
+        margin: 0 0.2rem;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+
+    .navbar-nav .nav-link:hover {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white !important;
+        transform: translateY(-2px);
+    }
+
+    .badge.pulse {
+        animation: pulse-glow 2s infinite;
+    }
+
+    @keyframes pulse-glow {
+        0% {
+            box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7);
+        }
+
+        70% {
+            box-shadow: 0 0 0 10px rgba(220, 53, 69, 0);
+        }
+
+        100% {
+            box-shadow: 0 0 0 0 rgba(220, 53, 69, 0);
+        }
+    }
+</style>
